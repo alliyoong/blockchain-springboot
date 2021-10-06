@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head class="card-header">
+    <meta charset="UTF-8">
+    <title>My Block Chain Site</title>
+    <link th:href="@{/css/material-kit.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main-div" align="center">
+        <h1>Welcome to hảo Block Chain website</h1>
+
+        <caption><h2>BlockChain</h2></caption>
+
+        <th:foreach th:each="node : ${chain.nodes}">
+          <div id="each-block" align="center">
+
+              <form class="form" th:action="@{__${T(com.khanh.util.Mappings).ADD_NODES}__}" method="post">
+                  <table>
+                      <tr>
+                          <td><h3 th:text="${node.name}"></h3></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label" for="updatedata">Data:</label></td>
+                          <td><input id="updatedata" type="text" name="data" th:placeholder="${node.data}"><input class="btn-primary" type="submit" value="Update"/></td>
+                          <td><input type="hidden" th:name="id" th:value="${node.id}"></td>
+
+                      </tr>
+                      <tr>
+                          <td><label class="label">Previous hash:</label></td>
+                          <td><label class="label" th:text="${node.previousHash}"></label></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label">Hash:</label></td>
+                          <td><label class="label" th:text="${node.hash}"></label></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label">Timestamp:</label></td>
+                          <td><label class="label" th:text="${node.timestamp}"></label></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label">Nonce:</label></td>
+                          <td><label class="label" th:text="${node.nonce}"></label></td>
+                      </tr>
+                  </table>
+              </form>
+          </div><br>
+        </th:foreach>
+
+        <form class="form" th:action="@{__${T(com.khanh.util.Mappings).ADD_NODES}__}" method="post">
+            <label class="label" for="data">Data: </label>
+            <input id="data" type="text" name="data"/><br><br>
+            <input class="btn-primary" type="submit" value="Add New Block">
+        </form>
+
+        <br>
+        <br>
+        <footer class="blockquote-footer">
+            <p>This website is created by Alliyoong</p>
+        </footer>
+    </div>
+
+</body>
+</html>
